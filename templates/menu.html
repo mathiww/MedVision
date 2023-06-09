@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <script src="https://kit.fontawesome.com/ec07e87039.js" crossorigin="anonymous"></script> -->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
+    <title>Menu</title>
+</head>
+<body>
+    <main>
+        <h1>Classificador de imagem</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input class="file-input" type="file" name="file" id="file" required>
+            <input class="submit-btn" type="submit">
+        </form>
+
+        
+        {% if class_name != undifined %}
+        <p class="class-name"><strong>{{ class_name }}</strong></p>
+        {% endif %}
+
+
+        {% if modal_class_name != undifined %}
+        <section id="confirmationModal">
+            <div class="modal-card">
+                <h2>Tela de confirmação</h2>
+    
+                <p>Foi detectada uma imagem da classe: <strong>{{ modal_class_name }}</strong></p>
+    
+                <p>Esta classificação está correta?</p>
+                <div>
+                    <a href="/" class="cancel-btn">Não</a>
+                    <a href="/classify" class="confirmation-btn">Sim</a>
+                </div>
+            </div>
+        </section>
+        {% endif %}
+    </main>
+</body>
+</html>

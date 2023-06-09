@@ -1,12 +1,32 @@
-from flask import Flask, jsonify
+from flask import Flask, render_template, request
+from models.UniversalClassifier.UniversalClassification import PredictDisease
 import os
 
 app = Flask(__name__)
+CLASS_NAME = ""
 
 
-@app.route('/')
-def index():
-    return jsonify({"Choo Choo": "Welcome to your Flask app 🚅"})
+@app.route('/', methods=["GET"])
+def menu():
+    return render_template("menu.html")
+
+
+@app.route('/', methods=["POST"])
+def menu_post():
+    global CLASS_NAME
+
+    file = request.files['file']
+    img_bytes = file.read()
+    CLASS_NAME = PredictDisease(img_bytes)
+
+    return render_template("menu.html", modal_class_name=CLASS_NAME)
+
+
+@app.route('/classify', methods=["GET"])
+def classify_image():
+    global CLASS_NAME
+
+    return render_template('classification.html', class_name=CLASS_NAME)
 
 
 if __name__ == '__main__':
