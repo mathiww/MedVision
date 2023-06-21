@@ -1,0 +1,60 @@
+{% extends "menu.html" %}
+{% block modal %}
+<section id="confirmationModal">
+    <div class="modal-card">
+        <h2>Tela de confirmação</h2>
+
+        <p>Foi detectada uma imagem da classe: <strong>{{ modal_class_name }}</strong></p>
+        <p>Esta classificação está correta?</p>
+
+        <div>
+            <button type="button" id="modalConfirmBtn">Sim</button>
+            <button type="button" id="modalCancelBtn">Não</button>
+        </div>
+    </div>
+</section>
+{% endblock %}
+{% block scripts %}
+<script>
+    var classIndex = '{{ modal_class_index }}';
+
+    if (classIndex != '') {
+        document.getElementById('confirmationModal').style.display = 'flex';
+    };
+
+    document.getElementById('modalCancelBtn').addEventListener("click", function() {
+        document.getElementById('confirmationModal').style.display = 'none';
+    });
+
+    
+    document.getElementById('modalConfirmBtn').addEventListener("click", function() {
+        document.getElementById('confirmationModal').style.display = 'none';
+
+        switch (classIndex) {
+            case '0':
+                window.location.replace("/classify");
+                break;
+            case '1':
+                window.location.replace("/classify");
+                break;
+            case '2':
+                window.location.replace("/classify");
+                break;
+            case '3':
+                window.location.replace("/classify");
+                break;
+            case '4':
+                window.location.replace("/classify");
+                break;
+            case '5':
+                window.location.replace("/classify");
+                break;
+            case '6':
+                window.location.replace("/classify");
+                break;
+            case '7':
+                window.location.replace("/classify");
+        };   
+    });
+</script>
+{% endblock %}

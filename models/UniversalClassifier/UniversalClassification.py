@@ -34,4 +34,4 @@ def PredictDisease(img_bytes):
 
     label_idx = np.argmax(prediction)
 
-    return CLASSES[label_idx]
+    return CLASSES[label_idx], label_idx

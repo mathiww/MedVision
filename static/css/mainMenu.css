@@ -16,6 +16,8 @@ h1, .class-name {
     text-align: center;
 }
 
+/* ########## IMAGE SUBMIT FORM ########## */
+
 form {
     display: flex;
     flex-direction: column;
@@ -63,6 +65,11 @@ form input.submit-btn:hover {
     transition: .2s ease-in-out;
 }
 
+/* ########## END IMAGE SUBMIT FORM ########## */
+
+
+/* ########## CONFIRMATION MODAL ########## */
+
 section#confirmationModal {
     position: fixed;
     top: 0;
@@ -72,7 +79,7 @@ section#confirmationModal {
     z-index: 1;
     overflow: hidden;
 
-    display: flex;
+    display: none;
     justify-content: center;
     align-items: center;
 
@@ -89,50 +96,50 @@ section#confirmationModal div.modal-card {
     border-radius: 1rem;
 }
 
-
 div.modal-card div {
     display: flex;
     justify-content: space-around;
     gap: 1rem;
 }
 
-section#confirmationModal a {
-    text-decoration: none;
+div.modal-card button {
+    font-size: 1rem;
 }
 
-section#confirmationModal a.close-btn {
-    font-size: 1.2rem;
+
+div.modal-card button#modalCancelBtn {
     color: red;
-}
-
-div.modal-card a.cancel-btn {
     width: 5rem;
     padding: .6rem;
 
-    color: red;
     border: .1rem solid red;
     border-radius: .4rem;
+    cursor: pointer;
 
     text-align: center;
     transition: .2s ease;
 }
 
-div.modal-card a.cancel-btn:hover {
+div.modal-card button#modalCancelBtn:hover {
     background-color: rgba(255, 0, 0, 0.2);
 }
 
-div.modal-card a.confirmation-btn {
+div.modal-card button#modalConfirmBtn {
+    color: #0B5ED7;
     width: 5rem;
     padding: .6rem;
 
-    color: #0B5ED7;
     border: .1rem solid #0B5ED7;
     border-radius: .4rem;
+    cursor: pointer;
 
     text-align: center;
     transition: .2s ease;
 }
 
-div.modal-card a.confirmation-btn:hover {
+div.modal-card #modalConfirmBtn:hover {
     background-color: #0b5dd75f;
 }
+
+/* ########## END CONFIRMATION MODAL ########## */
+
