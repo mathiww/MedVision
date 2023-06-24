@@ -1,7 +1,7 @@
 from torch import nn
 from math import floor
 
-class UniversalClassifierModel(nn.Module):
+class Model(nn.Module):
     def __init__(self, num_classes, size_image=64, in_channels=3, out_channels=32, num_conv_layers=3): # Defining features configuration
         super().__init__()
 

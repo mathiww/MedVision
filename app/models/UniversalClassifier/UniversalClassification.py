@@ -2,15 +2,14 @@ from torch import load
 from torchvision import transforms
 from torch.nn.functional import softmax
 
-from models.UniversalClassifier.UniversalClassifierModel import UniversalClassifierModel
+from app.models.UniversalClassifier.UniversalClassifierModel import Model
 
 from PIL import Image
-import numpy as np
 from io import BytesIO
+import numpy as np
 
 
 # VARIABLES
-
 
 TRANSFORMS = transforms.Compose([
     transforms.ToTensor(),
@@ -21,8 +20,8 @@ TRANSFORMS = transforms.Compose([
 
 CLASSES = ["Sangue", "MRI do Encéfalo", "CT do Peito", "RX do Peito", "MRI do Joelho", "RX do Joelho", "MRI do Fígado", "Ocular", "Inesperada"]
 
-NET = UniversalClassifierModel(num_classes=9).eval()
-NET.load_state_dict(load("./models/UniversalClassifier/multiClassifierCheckpoint.pth.tar", map_location ='cpu')["state_dict"])
+NET = Model(num_classes=9).eval()
+NET.load_state_dict(load("./app/models/UniversalClassifier/multiClassifierCheckpoint.pth.tar", map_location ='cpu')["state_dict"])
 
 
 def PredictDisease(img_bytes):
