@@ -11,4 +11,3 @@ class Config:
     SESSION_PERMANENT = True
     PERMANENT_SESSION_LIFETIME = timedelta(hours=1)
     SESSION_TYPE = 'sqlalchemy'
-    SESSION_FILE_DIR = './app/flask_session'

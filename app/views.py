@@ -53,6 +53,8 @@ def register():
     form = RegisterForm()
 
     if form.validate_on_submit():
+        form.validate_data(username=form.username, email=form.email)
+
         hashed_password = bcrypt.generate_password_hash(form.password.data)
         new_user = User(username=form.username.data, email=form.email.data, password=hashed_password)
         db.session.add(new_user)
@@ -89,15 +91,23 @@ def logout():
 @login_required
 def dashboard():
     if request.method == 'GET':
-        return render_template('Menu.html')
+        return render_template('Dashboard.html', classifications=current_user.classifications)
 
 
     file = request.files['file']
-    session['images'] = file.read()
-    session['class_name'], class_index = PredictDisease(session['images'])
+    session['image'] = file.read()
+    session['class_name'], class_index = PredictDisease(session['image'])
 
     if class_index == 8:
         return render_template('ErrorModal.html', modal_class_index=class_index)
+    
+    new_classification = Classifications(
+        user_id = current_user.id,
+        name = session['class_name'],
+        image = b64encode(session['image']).decode('utf-8')
+    )
+    db.session.add(new_classification)
+    db.session.commit()
     
     return render_template('ConfirmModal.html', modal_class_name=session['class_name'], modal_class_index=class_index)
 
@@ -106,4 +116,4 @@ def dashboard():
 @login_required
 def classify_image():
 
-    return render_template('Classification.html', class_name=session['class_name'], encoded_image=b64encode(session['images']).decode('utf-8'))
+    return render_template('Classification.html', class_name=session['class_name'], encoded_image=b64encode(session['image']).decode('utf-8'))

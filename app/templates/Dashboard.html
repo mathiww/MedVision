@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/dashboard.css')}}">
+    <title>Menu</title>
+</head>
+<body>
+    <header>
+        <a href="/logout">Logout</a>
+        <a href="/register">Cadastrar</a>
+    </header>
+
+    <main id="main-content">
+        {% block modal %}
+        {% endblock %}
+
+        <h1>Classificador de imagem</h1>
+
+        <form method="POST" enctype="multipart/form-data">
+            <input class="file-input" type="file" name="file" id="file" required>
+            <input class="submit-btn" type="submit">
+        </form>
+
+        {% if classifications != undefined %}
+        <section id="past-classifications">
+            <h2>Past classifications</h2>
+
+            <div class="box-title">
+                <h3>Images</h3>
+                <h3>Classes</h3>
+            </div>
+
+            {% for c in classifications  %}
+            <div class="box-container">
+                <img src="data:image/png;base64,{{ c.image }}" alt="Image class">
+
+                <p>Classe: {{ c.name }}</p>
+            </div>
+            {% endfor %}
+        </section>
+        {% endif %}
+
+    </main>
+
+    {% block scripts %}
+    {% endblock %}
+</body>
+</html>

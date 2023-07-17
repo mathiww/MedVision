@@ -16,6 +16,12 @@ h1, .class-name {
     text-align: center;
 }
 
+#main-content {
+    max-width: 100rem;
+    margin: 0 auto;
+}
+
+
 /* ########## IMAGE SUBMIT FORM ########## */
 
 form {
@@ -143,3 +149,38 @@ div.modal-card #modalConfirmBtn:hover {
 
 /* ########## END CONFIRMATION MODAL ########## */
 
+/* ########## PAST CLASSIFICATIONS ########## */
+
+#past-classifications {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+
+    max-width: 70rem;
+    margin: 1rem auto;
+}
+
+#past-classifications .box-title {
+    display: grid;
+    grid-template-columns: auto auto;
+    justify-content: space-around;
+}
+
+#past-classifications .box-container {
+    display: grid;
+    grid-template-columns: auto auto;
+    align-items: center;
+
+    border: .1rem solid black;
+    padding: .6rem;
+    border-radius: .4rem;
+}
+
+#past-classifications .box-container img {
+    border-radius: .4rem;
+    width: 12rem;
+    height: 8rem;
+    object-fit: cover;
+}
+
+/* ########## END PAST CLASSIFICATIONS ########## */
