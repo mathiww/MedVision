@@ -6,12 +6,8 @@ from .views import main
 from config import Config
 
 
-def Create_App():
+app = Flask(__name__)
+app.config.from_object(Config)
+Session(app)
 
-    app = Flask(__name__)
-    app.config.from_object(Config)
-    Session(app)
-
-    app.register_blueprint(main)
-
-    return app
+app.register_blueprint(main)
