@@ -23,7 +23,7 @@ class User(db.Model, UserMixin):
 class Classifications(db.Model):
     id = db.Column('id', db.Integer, primary_key=True, autoincrement=True)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'))
-    name = db.Column(db.String(55), nullable=False, unique=True)
+    name = db.Column(db.String(55), nullable=False)
     image = db.Column(db.Text, nullable=False)
     # mimetype = db.Column(db.Text, nullable=False)
 
