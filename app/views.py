@@ -1,15 +1,19 @@
-from flask import Blueprint, render_template, request, session, redirect
+from flask import Blueprint, render_template, session, redirect, jsonify, url_for
 
-from .models.UniversalClassifier.UniversalClassification import PredictDisease
+from .models import PredictImageType, PredictDisease 
+
 from base64 import b64encode
 
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from flask_wtf import FlaskForm
-from wtforms import StringField, PasswordField, EmailField, SubmitField
-from wtforms.validators import InputRequired, Length, ValidationError
+from wtforms import StringField, PasswordField, EmailField, SubmitField, FileField
+from wtforms.validators import InputRequired, Length, Email, ValidationError
+from flask_wtf.file import FileAllowed
+
 from flask_bcrypt import Bcrypt
 
-from .db import *
+from .db import * # Importing app from here
+
 
 main = Blueprint('main', __name__)
 
@@ -19,6 +23,14 @@ login_manager = LoginManager(app)
 login_manager.login_view = 'login'
 
 
+def clear_session(keys: list = None):
+    if keys:
+        for k in keys:
+            session.pop(k)
+        return
+    
+    session.clear()
+
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
@@ -26,7 +38,7 @@ def load_user(user_id):
 
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={'placeholder': 'Username'})
-    email = EmailField(validators=[InputRequired()], render_kw={'placeholder': 'E-mail'})
+    email = EmailField(validators=[InputRequired(), Email()], render_kw={'placeholder': 'E-mail'})
     password = PasswordField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={'placeholder': 'Password'})
 
     submit = SubmitField("Resgiter")
@@ -48,6 +60,20 @@ class LoginForm(FlaskForm):
     submit = SubmitField("Login")
 
 
+class ImageForm(FlaskForm):
+    image = FileField(validators=[InputRequired(), FileAllowed(upload_set=['png', 'tiff', 'jpeg', 'jpg', 'dicom'], message='File type not allowed.')])
+
+
+@app.errorhandler(404) 
+def not_found(e):
+  return render_template("404.html")
+ 
+
+@main.route('/', methods=['GET'])
+def home():
+    return redirect(url_for('main.login'))
+
+
 @main.route('/register', methods=['GET', 'POST'])
 def register():
     form = RegisterForm()
@@ -62,7 +88,7 @@ def register():
 
         login_user(new_user)
 
-        return redirect('/dashboard')
+        return redirect(url_for('main.dashboard'))
 
     return render_template('Register.html', form=form)
 
@@ -76,7 +102,7 @@ def login():
 
         if user and bcrypt.check_password_hash(user.password, form.password.data):
             login_user(user)
-            return redirect('/dashboard')
+            return redirect(url_for('main.dashboard'))
 
     return render_template('Login.html', form=form)
      
@@ -85,35 +111,66 @@ def login():
 def logout():
     logout_user()
     
-    return redirect('/login')
+    return redirect(url_for('main.login'))
 
-@main.route('/dashboard', methods=['GET', 'POST'])
+
+@main.route('/dashboard', methods=['GET'])
 @login_required
 def dashboard():
-    if request.method == 'GET':
-        return render_template('Dashboard.html', classifications=current_user.classifications)
-
-
-    file = request.files['file']
-    session['image'] = file.read()
-    session['class_name'], class_index = PredictDisease(session['image'])
-
-    if class_index == 8:
-        return render_template('ErrorModal.html', modal_class_index=class_index)
+    form = ImageForm()
     
+    return render_template('Dashboard.html', form=form, classifications=current_user.classifications)
+
+# @main.route('/liver-dashboard', methods=['GET', 'POST'])
+# @login_required
+# def liver_dashboard():
+#     pred_dict = PredictDisease(session['image'], session['class_index'])
+
+#     new_classification = Classifications(
+#         user_id=current_user.id,
+#         image=b64encode(session['image']).decode('utf-8'),
+#         class_name=session['class_name'],
+#         prediction=pred_dict,
+#     )
+#     db.session.add(new_classification)
+#     db.session.commit()
+
+#     clear_session(['class_name', 'class_index', 'image'])
+
+#     return render_template('Classification.html')
+
+
+@main.route('/process-data', methods=['POST'])
+@login_required
+def process_data():
+    form = ImageForm()
+    
+    if form.validate_on_submit():
+        session['image'] = form.image.data.read()
+        session['class_name'], session['class_index'] = PredictImageType(session['image'])
+
+        response = {'message': session['class_name'], 'index': str(session['class_index'])}
+
+        return jsonify(response)
+    
+    errors = form.errors
+    return jsonify(errors)
+
+
+@main.route('/redirect-to-model', methods=['POST'])
+@login_required
+def redirect_model():    
+    pred_dict = PredictDisease(session['image'], session['class_index'])
+
     new_classification = Classifications(
-        user_id = current_user.id,
-        name = session['class_name'],
-        image = b64encode(session['image']).decode('utf-8')
+        user_id=current_user.id,
+        image=b64encode(session['image']).decode('utf-8'),
+        class_name=session['class_name'],
+        prediction=pred_dict,
     )
     db.session.add(new_classification)
     db.session.commit()
-    
-    return render_template('ConfirmModal.html', modal_class_name=session['class_name'], modal_class_index=class_index)
 
+    clear_session(['class_name', 'class_index', 'image'])
 
-@main.route('/classify', methods=['GET'])
-@login_required
-def classify_image():
-
-    return render_template('Classification.html', class_name=session['class_name'], encoded_image=b64encode(session['image']).decode('utf-8'))
+    return redirect(url_for('main.dashboard'))

@@ -35,26 +35,26 @@ form input {
     font-size: .9rem;
 }
 
-form input.file-input {
+form input[type=file] {
     width: 25rem;
     border: .1rem solid var(--light-grey);
     border-radius: .5rem;
 }
 
-form input.file-input::file-selector-button {
+form input[type=file]::file-selector-button {
     padding: .6rem;
     border: none;
     border-right: .1rem solid var(--light-grey);
     background-color: var(--lighter-grey);
 }
 
-form input.file-input::file-selector-button:hover {
+form input[type=file]::file-selector-button:hover {
     cursor: pointer;
     background-color: var(--light-grey);
     transition: .2s ease-in-out;    
 }
 
-form input.submit-btn {
+form input[type=submit] {
     width: 8rem;
     padding: .6rem;
     border-radius: .4rem;
@@ -65,7 +65,7 @@ form input.submit-btn {
 }
 
 
-form input.submit-btn:hover {
+form input[type=submit]:hover {
     cursor: pointer;
     background-color: #0f50b2;
     transition: .2s ease-in-out;
@@ -76,7 +76,7 @@ form input.submit-btn:hover {
 
 /* ########## CONFIRMATION MODAL ########## */
 
-section#confirmationModal {
+.modal {
     position: fixed;
     top: 0;
     bottom: 0;
@@ -93,7 +93,7 @@ section#confirmationModal {
     background-color: rgba(0, 0, 0, 0.4);
 }
 
-section#confirmationModal div.modal-card {
+.modal div.modal-card {
     width: 30rem;
     padding: 2rem;
     background-color: white;
@@ -113,7 +113,7 @@ div.modal-card button {
 }
 
 
-div.modal-card button#modalCancelBtn {
+div.modal-card button.modal-close-btn {
     color: red;
     width: 5rem;
     padding: .6rem;
@@ -126,11 +126,11 @@ div.modal-card button#modalCancelBtn {
     transition: .2s ease;
 }
 
-div.modal-card button#modalCancelBtn:hover {
+div.modal-card button.modal-close-btn:hover {
     background-color: rgba(255, 0, 0, 0.2);
 }
 
-div.modal-card button#modalConfirmBtn {
+div.modal-card button.modal-confirm-btn {
     color: #0B5ED7;
     width: 5rem;
     padding: .6rem;
@@ -143,7 +143,7 @@ div.modal-card button#modalConfirmBtn {
     transition: .2s ease;
 }
 
-div.modal-card #modalConfirmBtn:hover {
+div.modal-card .modal-confirm-btn:hover {
     background-color: #0b5dd75f;
 }
 
@@ -151,16 +151,46 @@ div.modal-card #modalConfirmBtn:hover {
 
 /* ########## PAST CLASSIFICATIONS ########## */
 
-#past-classifications {
-    display: flex;
-    flex-direction: column;
-    gap: 2rem;
 
-    max-width: 70rem;
-    margin: 1rem auto;
+#past-classifications {
+    margin: 5rem 0;
 }
 
-#past-classifications .box-title {
+#past-classifications table {
+    border-collapse: collapse;
+    min-width: 60rem;
+    margin: 0 auto;
+}
+
+#past-classifications caption {
+    margin-bottom: 2rem;
+}
+
+#past-classifications td, th {
+    text-align: center;
+    padding: .4rem 0;
+}
+
+#past-classifications ol {
+    width: 7rem;
+    margin: 0 auto;
+    text-align: left;
+    list-style-position: inside;
+  }
+
+#past-classifications .item-row {
+    border-top: .1rem solid black;
+}
+
+#past-classifications .item-row img {
+    border-radius: .4rem;
+    width: 12rem;
+    height: 8rem;
+    object-fit: cover;
+} 
+
+
+/* #past-classifications .box-title {
     display: grid;
     grid-template-columns: auto auto;
     justify-content: space-around;
@@ -176,11 +206,6 @@ div.modal-card #modalConfirmBtn:hover {
     border-radius: .4rem;
 }
 
-#past-classifications .box-container img {
-    border-radius: .4rem;
-    width: 12rem;
-    height: 8rem;
-    object-fit: cover;
-}
+
 
 /* ########## END PAST CLASSIFICATIONS ########## */

@@ -5,7 +5,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css/dashboard.css')}}">
-    <title>Menu</title>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="{{url_for('static', filename='js/dashboard.js')}}""></script>
+
+    <title>Dashboard</title>
 </head>
 <body>
     <header>
@@ -14,38 +18,78 @@
     </header>
 
     <main id="main-content">
-        {% block modal %}
-        {% endblock %}
 
-        <h1>Classificador de imagem</h1>
-
-        <form method="POST" enctype="multipart/form-data">
-            <input class="file-input" type="file" name="file" id="file" required>
-            <input class="submit-btn" type="submit">
+        <form action="/redirect-to-model" method="POST" id="confirmModal" class="modal">
+            <div class="modal-card">
+                <h2>Tela de confirmação</h2>
+        
+                <p>Foi detectada uma imagem da classe: <strong id="class-name-modal">{{ modal_class_name }}</strong></p>
+                <p>Esta classificação está correta?</p>
+        
+                <div>
+                    <button type="submit" class="modal-confirm-btn">Sim</button>
+                    <button type="button" class="modal-close-btn">Não</button>
+                </div>
+            </div>
         </form>
 
+        <form id="errorModal" class="modal">
+            <div class="modal-card">
+                <h2>Imagem não pode ser usada</h2>
+        
+                <p>Foi detectada uma imagem que não condiz como uma imagem médica.</p>
+                <p>Tente novamente.</p>
+        
+                <div>
+                    <button type="button" class="modal-close-btn">Voltar</button>
+                </div>
+            </div>
+        </form>
+    
+    
+        <h1>Classificador de imagem</h1>
+    
+        <form id="file-form" method="POST" enctype="multipart/form-data">
+            {{ form.hidden_tag() }}
+            {{ form.image }}
+            <input type="submit" value="Enviar">
+        </form>
+    
         {% if classifications != undefined %}
         <section id="past-classifications">
-            <h2>Past classifications</h2>
+            <table>
+                <caption><strong>Classificações anteriores</strong></caption>
+    
+                <thead>
+                    <tr>
+                        <th>Imagens</th>
+                        <th>Classe</th>
+                        <th>Index / Previsão</th>
+                        <th>Data / Hórario</th>
+                    </tr>
+                </thead>
 
-            <div class="box-title">
-                <h3>Images</h3>
-                <h3>Classes</h3>
-            </div>
-
-            {% for c in classifications  %}
-            <div class="box-container">
-                <img src="data:image/png;base64,{{ c.image }}" alt="Image class">
-
-                <p>Classe: {{ c.name }}</p>
-            </div>
-            {% endfor %}
+                <tbody>
+                    {% for c in classifications %}
+                    <tr class="item-row">
+                        <td><img src="data:image/png;base64,{{ c.image }}"></td>
+                        <td>{{ c.class_name }}</td>
+                        <td>
+                            <ol>
+                                {% for i in range(3) %}
+                                <li><strong> {{ c.prediction[i|string][0] }}:</strong> {{ c.prediction[i|string][1] }}</li>
+                                {% endfor %}
+                            </ol>
+                        </td>
+                        <td>{{ c.time.strftime("%d/%m/%Y %H:%M")}} UTC</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>    
+            </table>
         </section>
         {% endif %}
-
+    
     </main>
 
-    {% block scripts %}
-    {% endblock %}
 </body>
 </html>
