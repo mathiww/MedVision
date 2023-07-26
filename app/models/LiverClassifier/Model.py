@@ -1,7 +1,6 @@
 from torch import nn, load
 from torchvision import transforms
 
-import numpy as np
 from PIL import Image
 from io import BytesIO
 
