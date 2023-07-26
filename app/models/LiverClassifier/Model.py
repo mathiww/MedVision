@@ -4,6 +4,8 @@ from torchvision import transforms
 from PIL import Image
 from io import BytesIO
 
+import os
+
 
 class LiverClassifier(nn.Module):
     def __init__(self):
@@ -55,7 +57,12 @@ class LiverClassifier(nn.Module):
 
 
     def load_weights(self, path="./app/models/LiverClassifier/best.pth.tar"):
-        self.load_state_dict(load(path, map_location ='cpu'))
+        print()
+        print(path)
+        print(os.getcwd())
+        print()
+
+        self.load_state_dict(load(path, map_location='cpu'))
         
 
     def transforms(self, x):

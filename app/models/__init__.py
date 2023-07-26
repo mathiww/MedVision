@@ -24,7 +24,7 @@ def PredictDisease(img, index):
     if index == 6:
         return model_logic(model=liverModel, img=img)
     else:
-        raise Exception("Model not implemented yet.")
+        return model_logic(model=liverModel, img=img)
 
 
 def model_logic(model, img):
