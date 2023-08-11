@@ -171,7 +171,7 @@ div.modal-card .modal-confirm-btn:hover {
     padding: .4rem 0;
 }
 
-#past-classifications ol {
+#past-classifications ul, #past-classifications ol {
     width: 7rem;
     margin: 0 auto;
     text-align: left;

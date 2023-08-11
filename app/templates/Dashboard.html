@@ -75,11 +75,11 @@
                         <td><img src="data:image/png;base64,{{ c.image }}"></td>
                         <td>{{ c.class_name }}</td>
                         <td>
-                            <ol>
-                                {% for i in range(3) %}
-                                <li><strong> {{ c.prediction[i|string][0] }}:</strong> {{ c.prediction[i|string][1] }}</li>
+                            <ul>
+                                {% for i in range(2) %}
+                                <li><strong> {{ c.prediction[i|string][0] }}:</strong> {{ c.prediction[i|string][1] }}%</li>
                                 {% endfor %}
-                            </ol>
+                            </ul>
                         </td>
                         <td>{{ c.time.strftime("%d/%m/%Y %H:%M")}} UTC</td>
                     </tr>
