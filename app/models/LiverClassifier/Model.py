@@ -13,8 +13,6 @@ class LiverClassifier(nn.Module):
 
         self.transform = transforms.Compose([
             transforms.Resize([224, 224]),
-            transforms.RandomRotation(degrees=(-10, 10)),
-            transforms.RandomPerspective(distortion_scale=.1, p=.2),
             transforms.ToTensor(),
             transforms.Normalize(mean=[0.1380], std=[0.1735])
         ])
