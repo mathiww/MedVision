@@ -1,7 +1,7 @@
-from .LiverClassifier.Model import LiverClassifier
 from .UniversalClassifier.Model import UniversalClassifier
-from .KneeXRayClassifier.Model import KneeXRayClassifier
 from .BrainTumorClassifier.Model import BrainTumorClassifier
+from .KneeXRayClassifier.Model import KneeXRayClassifier
+from .LiverClassifier.Model import LiverClassifier
 from .EyeClassifier.Model import EyeClassifier
 
 import torch.nn.functional as F
@@ -11,20 +11,20 @@ import numpy as np
 universalClassifier = UniversalClassifier().eval()
 universalClassifier.load_weights()
 
-brainModel = BrainTumorClassifier().eval()
-brainModel.load_weights()
+brainMRIModel = BrainTumorClassifier().eval()
+brainMRIModel.load_weights()
 
-kneeModel = KneeXRayClassifier()
+kneeXRModel = KneeXRayClassifier()
 
-liverModel = LiverClassifier().eval()
-liverModel.load_weights()
+liverMRIModel = LiverClassifier().eval()
+liverMRIModel.load_weights()
 
 eyeModel = EyeClassifier().eval()
 eyeModel.load_weights()
 
 
 """
-Indexs
+Indexes
 0 - Blood
 1 - Brain MRI
 2 - Chest CT
@@ -47,16 +47,24 @@ def PredictImageType(img):
 
 
 def PredictDisease(img, index):
+    # if index == 0:
+    #     return ModelLogic(model=bloodModel, img=img)
     if index == 1:
-        return ModelLogic(model=brainModel, img=img)
+        return ModelLogic(model=brainMRIModel, img=img)
+    # elif index == 2:
+    #     return ModelLogic(model=chestCTModel, img=img)
+    # elif index == 3:
+    #     return ModelLogic(model=chestXRModel, img=img)
+    # elif index == 4:
+    #     return ModelLogic(model=kneeMRIModel, img=img)
     elif index == 5:
-        return BinaryModelLogic(model=kneeModel, img=img)
+        return BinaryModelLogic(model=kneeXRModel, img=img)
     elif index == 6:
-        return ModelLogic(model=liverModel, img=img)
+        return ModelLogic(model=liverMRIModel, img=img)
     elif index == 7:
         return ModelLogic(model=eyeModel, img=img)
     else:
-        return ModelLogic(model=liverModel, img=img)
+        return ModelLogic(model=liverMRIModel, img=img)
     
 
 def ModelLogic(model, img):
@@ -67,7 +75,7 @@ def ModelLogic(model, img):
     results = np.around(results, 2)
     results = results[results[:, 1].argsort()][::-1]
 
-    dic = {i:[int(x), y] for i, (x, y) in enumerate(results.tolist())}
+    dic = {i:[model.class_names[int(x)], y] for i, (x, y) in enumerate(results.tolist())}
 
     return dic
 
@@ -80,6 +88,6 @@ def BinaryModelLogic(model, img):
     sorted_pred_array = pred_array[pred_array[:, 1].argsort()][::-1]
     
 
-    dic = {i:[int(x), y] for i, (x, y) in enumerate(sorted_pred_array.tolist())}
+    dic = {i:[model.class_names[int(x)], y] for i, (x, y) in enumerate(sorted_pred_array.tolist())}
 
     return dic

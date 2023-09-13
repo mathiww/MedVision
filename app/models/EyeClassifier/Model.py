@@ -1,12 +1,10 @@
 import torch
 from torch import nn, load
-import torch.nn.functional as F
 
 from PIL import Image
 from io import BytesIO
 
 import numpy as np
-import os
 
 
 class EyeClassifier(nn.Module):

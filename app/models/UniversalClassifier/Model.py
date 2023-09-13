@@ -16,7 +16,6 @@ class UniversalClassifier(nn.Module):
         num_conv_layers = 3 
         final_output = out_channels*(2**num_conv_layers) # Max image dimension
 
-        # Sorted by index
         self.class_names = ["Sangue", "MRI do Encéfalo", "CT do Peito", "RX do Peito", "MRI do Joelho", "RX do Joelho", "MRI do Fígado", "Ocular", "Inesperada"]
 
         self.transform = transforms.Compose([
@@ -25,7 +24,7 @@ class UniversalClassifier(nn.Module):
             transforms.Normalize(mean=[0.3720, 0.3410, 0.4056], std=[0.2808, 0.2760, 0.3118]),
         ])
 
-        self.features = nn.ModuleList() # List of convolutions layers
+        self.features = nn.ModuleList() # List of convolutional layers
 
         for _ in range(num_conv_layers):
             self.features.append(
@@ -39,7 +38,7 @@ class UniversalClassifier(nn.Module):
             )
             in_channels = out_channels
             out_channels = out_channels*2 if out_channels*2 < final_output else out_channels
-            shape = (floor(shape)-2)/2 # Auto image resolution calculation
+            shape = (floor(shape)-2)/2
 
 
         self.classifier = nn.Sequential(

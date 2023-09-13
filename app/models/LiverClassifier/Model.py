@@ -9,7 +9,25 @@ class LiverClassifier(nn.Module):
     def __init__(self):
         super().__init__()
 
-        self.class_names = []
+        self.class_names = {
+            0:'Axial T2w (ssfse)',
+            1:'Axial Precontrast Fat Suppressed T1w (dynpre)',
+            2:'Mid Arterial T1w',
+            3:'MRCP',
+            4:'Axial Late Dynamic T1w',
+            5:'Anything else',
+            6:'Axial In Phase (t1nfs)',
+            7:'Axial Opposed Phase (opposed)',
+            8:'Axial DWI',
+            9:'Coronal T2w',
+            10:'Portal Venous T1w (dynportal)',
+            11:'Localizers',
+            12:'Axial ADC',
+            13:'Coronal Late Dynamic T1w',
+            14:'Early Arterial T1w',
+            15:'Axial Transitional/Hepatocyte T1w',
+            17:'Late Arterial T1w'
+        }
 
         self.transform = transforms.Compose([
             transforms.Resize([224, 224]),
