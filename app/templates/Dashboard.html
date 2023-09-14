@@ -20,34 +20,39 @@
 
         <form action="/redirect-to-model" method="POST" id="confirmModal" class="modal">
             <div class="modal-card">
-                <h2>Tela de confirmação</h2>
+                <h2>Confirm screen</h2>
         
-                <p>Foi detectada uma imagem da classe: <strong id="class-name-modal">{{ modal_class_name }}</strong></p>
-                <p>Esta classificação está correta?</p>
+                <p>Has been detected a image of type: <strong id="class-name-modal">{{ modal_class_name }}</strong>.</p>
+                <p>This prediction is correct?</p>
         
+                <img src="" alt="">
+
                 <div>
-                    <button type="submit" class="modal-confirm-btn">Sim</button>
-                    <button type="button" class="modal-close-btn">Não</button>
+                    <button type="submit" class="modal-confirm-btn">Yes</button>
+                    <button type="button" class="modal-close-btn">No</button>
                 </div>
             </div>
         </form>
 
         <form id="errorModal" class="modal">
             <div class="modal-card">
-                <h2>Imagem não pode ser usada</h2>
+                <h2>Image can't be used</h2>
         
-                <p>Foi detectada uma imagem que não condiz como uma imagem médica.</p>
-                <p>Tente novamente.</p>
-        
+                <p>Has been detect a non medical image.</p>
+                <p>Try again.</p>
+                
+                <img src="" alt="">
+
                 <div>
-                    <button type="button" class="modal-close-btn">Voltar</button>
+                    <button type="button" class="modal-close-btn">Back</button>
                 </div>
             </div>
         </form>
     
     
-        <h1>Classificador de imagem</h1>
+        <h1>Medical image classfier</h1>
     
+
         <form id="file-form" method="POST" enctype="multipart/form-data">
             {{ form.hidden_tag() }}
             {{ form.image }}
@@ -55,16 +60,16 @@
         </form>
     
         {% if classifications != undefined %}
-        <section id="past-classifications">
+        <section id="previous-classifications">
             <table>
-                <caption><strong>Classificações anteriores</strong></caption>
+                <caption>Previous classifications</caption>
     
                 <thead>
                     <tr>
-                        <th>Imagens</th>
-                        <th>Classe</th>
-                        <th>Index / Previsão</th>
-                        <th>Data / Hórario</th>
+                        <th>Images</th>
+                        <th>Type</th>
+                        <th>Prediction</th>
+                        <th>Date / Time</th>
                     </tr>
                 </thead>
 
@@ -75,9 +80,15 @@
                         <td>{{ c.class_name }}</td>
                         <td>
                             <ul>
+                                {% if c.prediction|length >= 3 %}
+                                {% for i in range(2) %} 
+                                <li><strong> {{ c.prediction[i|string][0] }}:</strong> {{ c.prediction[i|string][1] }}%</li>
+                                {% endfor %}
+                                {% else %}
                                 {% for i in range(2) %}
                                 <li><strong> {{ c.prediction[i|string][0] }}:</strong> {{ c.prediction[i|string][1] }}%</li>
                                 {% endfor %}
+                                {% endif %}
                             </ul>
                         </td>
                         <td>{{ c.time.strftime("%d/%m/%Y %H:%M")}} UTC</td>

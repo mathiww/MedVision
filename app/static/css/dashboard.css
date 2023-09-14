@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@100;200;300;400;500;600&family=Roboto:wght@100;300;400;500;700&display=swap');
+
 :root {
     --lighter-grey: rgb(228, 228, 228);
     --light-grey: rgb(200, 200, 200);
@@ -9,7 +11,7 @@
 }
 
 html {
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Montserrat', 'Roboto', Arial, Helvetica, sans-serif;
 }
 
 h1, .class-name {
@@ -89,7 +91,6 @@ form input[type=submit]:hover {
     justify-content: center;
     align-items: center;
 
-    
     background-color: rgba(0, 0, 0, 0.4);
 }
 
@@ -98,14 +99,22 @@ form input[type=submit]:hover {
     padding: 2rem;
     background-color: white;
 
-    border: .1rem solid black;
+    border: .1rem solid var(--lighter-grey);
     border-radius: 1rem;
 }
 
 div.modal-card div {
     display: flex;
     justify-content: space-around;
-    gap: 1rem;
+}
+
+.modal div.modal-card img {
+    display: block;
+    margin: 1.6rem auto 1.2rem;
+    width: 10rem;
+    height: 8rem;
+    border-radius: .4rem;
+    object-fit: cover;
 }
 
 div.modal-card button {
@@ -149,67 +158,87 @@ div.modal-card .modal-confirm-btn:hover {
 
 /* ########## END CONFIRMATION MODAL ########## */
 
-/* ########## PAST CLASSIFICATIONS ########## */
+/* ########## PREVIOUS CLASSIFICATIONS ########## */
 
 
-#past-classifications {
-    margin: 5rem 0;
+#previous-classifications {
+    margin: 5rem auto;
 }
 
-#past-classifications table {
+#previous-classifications table {
     border-collapse: collapse;
-    min-width: 60rem;
+    max-width: 60rem;
     margin: 0 auto;
+
+    /* border: .1rem solid var(--lighter-grey); */
+    border-radius: .6rem;
+    border-style: hidden; /* hide standard table (collapsed) border */
+    box-shadow: .1rem .4rem .6rem .1rem var(--lighter-grey); 
 }
 
-#past-classifications caption {
+#previous-classifications caption {
+    font-size: 1.6rem;
+    font-weight: bold;
+    text-align: left;
     margin-bottom: 2rem;
 }
 
-#past-classifications td, th {
-    text-align: center;
-    padding: .4rem 0;
+#previous-classifications thead, 
+#previous-classifications .item-row  {
+    border-bottom: .1rem solid var(--lighter-grey);
 }
 
-#past-classifications ul, #past-classifications ol {
-    width: 7rem;
-    margin: 0 auto;
+#previous-classifications table td,
+#previous-classifications table th {
+    font-size: .8rem;
+    padding: .6rem;
+    padding-left: 2rem;
+}
+
+#previous-classifications table th {
+    width: 25%;
+    font-size: .7rem;
+    color: var(--light-grey);
+    text-transform: uppercase;
     text-align: left;
-    list-style-position: inside;
-  }
-
-#past-classifications .item-row {
-    border-top: .1rem solid black;
 }
 
-#past-classifications .item-row img {
-    border-radius: .4rem;
-    width: 12rem;
-    height: 8rem;
-    object-fit: cover;
-} 
+#previous-classifications table th:nth-child(1) {
+    color: black;
+}
+
+#previous-classifications table th:nth-child(1), 
+#previous-classifications table td:nth-child(1) {
+    border-right: .1rem solid var(--lighter-grey);
+}
 
 #imagemLogout {
     width: 25px;
 }
 
 
-/* #past-classifications .box-title {
-    display: grid;
-    grid-template-columns: auto auto;
-    justify-content: space-around;
+#previous-classifications ul, #previous-classifications ol {
+    text-align: left;
+    list-style-position: inside;
 }
 
-#past-classifications .box-container {
-    display: grid;
-    grid-template-columns: auto auto;
-    align-items: center;
-
-    border: .1rem solid black;
-    padding: .6rem;
+#previous-classifications .item-row img {
     border-radius: .4rem;
+    width: 6rem;
+    height: 4rem;
+    object-fit: cover;
+} 
+
+@media(max-width: 768px) {
+    
+html {
+    font-size: 80%;
 }
 
+#previous-classifications table {
+    max-width: 38rem;
+}
 
+}
 
-/* ########## END PAST CLASSIFICATIONS ########## */
+/* ########## END PREVIOUS CLASSIFICATIONS ########## */

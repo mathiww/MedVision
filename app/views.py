@@ -1,14 +1,14 @@
 from flask import Blueprint, render_template, session, redirect, jsonify, url_for
 
-from .models import PredictImageType, PredictDisease 
+from .models import PredictImageType, PredictDisease
 
 from base64 import b64encode
 
 from flask_login import login_user, LoginManager, login_required, logout_user, current_user
 from flask_bcrypt import Bcrypt
 
-from .db import * # Importing app from here
 from .forms import LoginForm, RegisterForm, ImageForm
+from .db import * # Importing app from here
 
 main = Blueprint('main', __name__)
 
@@ -29,11 +29,6 @@ def clear_session(keys: list = None):
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(int(user_id))
-
-
-@app.errorhandler(404) 
-def not_found(e):
-  return render_template("404.html")
  
 
 @main.route('/', methods=['GET'])
@@ -74,7 +69,8 @@ def login():
     return render_template('Login.html', form=form)
      
 
-@main.route('/logout', methods=['GET', 'POST'])
+@main.route('/logout', methods=['GET'])
+@login_required
 def logout():
     logout_user()
     
@@ -88,24 +84,6 @@ def dashboard():
     
     return render_template('Dashboard.html', form=form, classifications=current_user.classifications)
 
-# @main.route('/liver-dashboard', methods=['GET', 'POST'])
-# @login_required
-# def liver_dashboard():
-#     pred_dict = PredictDisease(session['image'], session['class_index'])
-
-#     new_classification = Classifications(
-#         user_id=current_user.id,
-#         image=b64encode(session['image']).decode('utf-8'),
-#         class_name=session['class_name'],
-#         prediction=pred_dict,
-#     )
-#     db.session.add(new_classification)
-#     db.session.commit()
-
-#     clear_session(['class_name', 'class_index', 'image'])
-
-#     return render_template('Classification.html')
-
 
 @main.route('/process-data', methods=['POST'])
 @login_required
@@ -116,7 +94,7 @@ def process_data():
         session['image'] = form.image.data.read()
         session['class_name'], session['class_index'] = PredictImageType(session['image'])
 
-        response = {'message': session['class_name'], 'index': str(session['class_index'])}
+        response = {'message': session['class_name'], 'index': str(session['class_index']), 'image': str(b64encode(session['image']).decode('utf-8'))}
 
         return jsonify(response)
     
@@ -141,3 +119,13 @@ def redirect_model():
     clear_session(['class_name', 'class_index', 'image'])
 
     return redirect(url_for('main.dashboard'))
+
+
+@app.errorhandler(404) 
+def not_found(e):
+  return render_template("404.html")
+
+
+@app.errorhandler(405) 
+def not_allowed(e):
+  return render_template("404.html")

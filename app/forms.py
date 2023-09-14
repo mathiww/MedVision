@@ -5,6 +5,7 @@ from wtforms import StringField, PasswordField, EmailField, SubmitField, FileFie
 from wtforms.validators import InputRequired, Length, Email, ValidationError
 from flask_wtf.file import FileAllowed
 
+
 class RegisterForm(FlaskForm):
     username = StringField(validators=[InputRequired(), Length(min=4, max=20)], render_kw={'placeholder': 'Digite aqui o usuário'})
     email = EmailField(validators=[InputRequired(), Email()], render_kw={'placeholder': 'Digite aqui o e-mail'})
