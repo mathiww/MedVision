@@ -1,10 +1,12 @@
 $(document).ready(function() {
-    function showConfirmModal(message) {
+    function showConfirmModal(message, image) {
         $('#class-name-modal').text(message);
+        document.querySelector('#confirmModal img').src = `data:image/png;base64,${image}`
         document.getElementById('confirmModal').style.display = 'flex';
     }
 
-    function showErrorModal() {
+    function showErrorModal(image) {
+        document.querySelector('#errorModal img').src = `data:image/png;base64,${image}`
         document.getElementById('errorModal').style.display = 'flex';
     } 
 
@@ -34,9 +36,9 @@ $(document).ready(function() {
             success: function (data) {
                 console.log(data)
                 if (data.index == '8') {
-                    showErrorModal()
+                    showErrorModal(data.image)
                 } else {
-                    showConfirmModal(data.message)
+                    showConfirmModal(data.message, data.image)
                 }
             },
             error: function (xhr, status, error) {

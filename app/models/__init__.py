@@ -33,7 +33,7 @@ Indexes
 5 - Knee XR
 6 - Liver MRI
 7 - Eye
-8 - Non medic image
+8 - Non medical image
 """
 
 
@@ -72,7 +72,7 @@ def ModelLogic(model, img):
     pred = F.softmax(pred_tensor, dim=1).squeeze().detach().numpy()
 
     results = [[i, p] for i, p in enumerate(pred*100)]
-    results = np.around(results, 2)
+    results = np.around(results, 1)
     results = results[results[:, 1].argsort()][::-1]
 
     dic = {i:[model.class_names[int(x)], y] for i, (x, y) in enumerate(results.tolist())}
@@ -83,7 +83,7 @@ def ModelLogic(model, img):
 def BinaryModelLogic(model, img):
     pred = model.forward(img)
 
-    pred = np.around(pred[0][0] * 100, 2)
+    pred = np.around(pred[0][0] * 100, 1)
     pred_array = np.array([[1, pred], [0, 100 - pred]])
     sorted_pred_array = pred_array[pred_array[:, 1].argsort()][::-1]
     

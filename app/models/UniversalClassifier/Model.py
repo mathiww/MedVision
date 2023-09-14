@@ -16,7 +16,7 @@ class UniversalClassifier(nn.Module):
         num_conv_layers = 3 
         final_output = out_channels*(2**num_conv_layers) # Max image dimension
 
-        self.class_names = ["Sangue", "MRI do Encéfalo", "CT do Peito", "RX do Peito", "MRI do Joelho", "RX do Joelho", "MRI do Fígado", "Ocular", "Inesperada"]
+        self.class_names = ["Blood", "Brain MRI", "Chest CT", "Chest XR", "Knee MRI", "Knee XR", "Liver MRI", "Eye", "Non medical image"]
 
         self.transform = transforms.Compose([
             transforms.ToTensor(),

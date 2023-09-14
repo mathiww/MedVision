@@ -26,7 +26,7 @@ class LiverClassifier(nn.Module):
             13:'Coronal Late Dynamic T1w',
             14:'Early Arterial T1w',
             15:'Axial Transitional/Hepatocyte T1w',
-            17:'Late Arterial T1w'
+            16:'Late Arterial T1w'
         }
 
         self.transform = transforms.Compose([

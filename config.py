@@ -2,6 +2,7 @@ from datetime import timedelta
 
 
 class Config:
+    MAX_CONTENT_LENGHT = 1024 * 1024 * 8 # 8 MB
     SECRET_KEY = 'secret-key'
 
     # SQLAlchemy
