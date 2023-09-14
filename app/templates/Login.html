@@ -4,17 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/cadastrar.css')}}">
+    <link rel="stylesheet" href="{{url_for('static', filename='css/login.css')}}">
 </head>
 <body>
-    <header>
-        <a href="/register">Cadastrar</a>
-    </header>
-
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.password }}
-        {{ form.submit }}
-    </form>
+    <div class="containerPrincipal">
+        <div class="containerFoto">
+        </div>
+            <div class="containerForm">
+                <form method="POST" id="formRegistro">
+                    {{ form.hidden_tag() }}
+                    <span class="textForm">Usuário</span>
+                    {{ form.username }}
+                    <span class="textForm">Senha</span>
+                    {{ form.password }}
+                    {{ form.submit }}
+                </form>
+                <span>Não possui cadastro? Crie <a id="loginref" href="/register">aqui</a> sua conta</span>
+            </div>
+        </div>
 </body>
 </html>

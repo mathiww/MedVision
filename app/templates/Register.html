@@ -4,19 +4,25 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Register</title>
+    <link rel="stylesheet" href="{{url_for('static', filename='css/cadastrar.css')}}">
 </head>
 <body>
-    <header>
-        <a href="/login">Login</a>
-    </header>
-
-
-    <form method="POST">
-        {{ form.hidden_tag() }}
-        {{ form.username }}
-        {{ form.email }}
-        {{ form.password }}
-        {{ form.submit }}
-    </form>
+    <div class="containerPrincipal">
+    <div class="containerFoto">
+    </div>
+        <div class="containerForm">
+            <form method="POST" id="formRegistro">
+                {{ form.hidden_tag() }}
+                <span class="textForm">Usuário</span>
+                {{ form.username }}
+                <span class="textForm">Email</span>
+                {{ form.email }}
+                <span class="textForm">Senha</span>
+                {{ form.password }}
+                {{ form.submit }}
+            </form>
+            <span>Já possui cadastro? Entre <a id="loginref" href="/login">aqui</a></span>
+        </div>
+    </div>
 </body>
 </html>

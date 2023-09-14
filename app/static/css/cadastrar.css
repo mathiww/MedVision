@@ -1,0 +1,65 @@
+@import url('https://fonts.googleapis.com/css2?family=Josefin+Sans:wght@200;400;700&family=Open+Sans:wght@400;700&display=swap');
+
+body {
+    padding: 0;
+    margin: 0;
+}
+.containerPrincipal {
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    flex-direction: row;
+}
+
+.containerFoto {
+    width: 60vw;
+    height: 100%;
+    background-color: #000041;
+    background-image: url('../images/background-register.jpg');
+    background-size: cover;
+    background-position: -10vw;
+    border-radius: 0 20px 20px 0;
+}
+
+.containerForm {
+    padding: 20px;
+    width: 40vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+#formRegistro {
+    display: flex;
+    width: 80%;
+    flex-direction: column;
+}
+
+#formRegistro input {
+    border: 1px solid #44444471;
+    padding: 5px 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    border-bottom: 2px solid black;
+}
+
+#formRegistro input[type=submit] {
+    font-size: 1.05rem;
+}
+
+#formRegistro input[type=submit]:hover {
+    cursor: pointer;
+    background-color: #cecece;
+}
+
+.textForm {
+    font-size: 1.2rem;
+    font-family: 'Josefin Sans';
+    font-weight: 200;
+    padding-left: 0.25rem;
+    padding-bottom: 0.25rem;
+}
+
+#loginref {
+    color: black;
+}
