@@ -5,18 +5,17 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="{{url_for('static', filename='css/dashboard.css')}}">
-
+    <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='icons/favicon/apple-touch-icon.png')}}">
+    <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='icons/favicon/favicon-32x32.png')}}">
+    <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='icons/favicon/favicon-16x16.png')}}">
+    <link rel="manifest" href="{{url_for('static', filename='icons/favicon/site.webmanifest')}}">
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
-    <script src="{{url_for('static', filename='js/dashboard.js')}}""></script>
+    <script src="{{url_for('static', filename='js/dashboard.js')}}"></script>
 
     <title>Dashboard</title>
 </head>
 <body>
-    <header>
-        <a href="/logout">Logout</a>
-        <a href="/register">Cadastrar</a>
-    </header>
-
+    <a href="/logout"><img id="imagemLogout" src="../static/icons/saida.svg" alt="Logout"></a>
     <main id="main-content">
 
         <form action="/redirect-to-model" method="POST" id="confirmModal" class="modal">

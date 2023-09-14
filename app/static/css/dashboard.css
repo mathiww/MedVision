@@ -189,6 +189,10 @@ div.modal-card .modal-confirm-btn:hover {
     object-fit: cover;
 } 
 
+#imagemLogout {
+    width: 25px;
+}
+
 
 /* #past-classifications .box-title {
     display: grid;
