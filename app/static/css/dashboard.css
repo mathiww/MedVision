@@ -162,13 +162,12 @@ div.modal-card .modal-confirm-btn:hover {
 
 
 #previous-classifications {
-    width: 60rem;
     margin: 5rem auto;
 }
 
 #previous-classifications table {
     border-collapse: collapse;
-    min-width: 60rem;
+    max-width: 60rem;
     margin: 0 auto;
 
     /* border: .1rem solid var(--lighter-grey); */
@@ -226,6 +225,16 @@ div.modal-card .modal-confirm-btn:hover {
     object-fit: cover;
 } 
 
+@media(max-width: 768px) {
+    
+html {
+    font-size: 80%;
+}
 
+#previous-classifications table {
+    max-width: 38rem;
+}
+
+}
 
 /* ########## END PREVIOUS CLASSIFICATIONS ########## */

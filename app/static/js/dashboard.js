@@ -10,17 +10,13 @@ $(document).ready(function() {
         document.getElementById('errorModal').style.display = 'flex';
     } 
 
-    function hideModal() {
-        $('.modal').hide();
-    }
-
     $('.modal-close-btn').on('click', function() {
         $('#file-form')[0].reset()
-        hideModal();
+        $('.modal').hide();
     });
 
     $('.modal-confirm-btn').on('click', function() {
-        hideModal()        
+        $('.modal').hide();      
     });
 
     $('#file-form').submit(function (e) {
@@ -34,11 +30,10 @@ $(document).ready(function() {
             contentType: false,
             cache: false,
             success: function (data) {
-                console.log(data)
                 if (data.index == '8') {
-                    showErrorModal(data.image)
+                    showErrorModal(data.image);
                 } else {
-                    showConfirmModal(data.message, data.image)
+                    showConfirmModal(data.message, data.image);
                 }
             },
             error: function (xhr, status, error) {
