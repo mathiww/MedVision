@@ -234,12 +234,18 @@ div.modal-card .modal-confirm-btn:hover {
 }
 
 #load-more button {
-    color: white;
-
-    border: none;
     padding: .6rem;
-    border-radius: .6rem;
+    border-radius: .4rem;
+    border: none;
+
     background-color: #0B5ED7;
+    color: white;
+}
+
+#load-more button:hover {
+    cursor: pointer;
+    background-color: #0f50b2;
+    transition: .2s ease-in-out;
 }
 
 @media(max-width: 768px) {
@@ -249,7 +255,7 @@ html {
 }
 
 #previous-classifications table {
-    max-width: 38rem;
+    width: 100%;
 }
 
 }

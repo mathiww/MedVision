@@ -22,37 +22,37 @@
 
         <form action="/redirect-to-model" method="POST" id="confirmModal" class="modal">
             <div class="modal-card">
-                <h2>Confirm screen</h2>
+                <h2>Tela de confirmação</h2>
         
-                <p>Has been detected a image of type: <strong id="class-name-modal">{{ modal_class_name }}</strong>.</p>
-                <p>This prediction is correct?</p>
+                <p>Foi detectado uma imagem do tipo: <strong id="class-name-modal">{{ modal_class_name }}</strong>.</p>
+                <p>Essa predição está correta?</p>
         
                 <img src="" alt="">
 
                 <div>
-                    <button type="submit" class="modal-confirm-btn">Yes</button>
-                    <button type="button" class="modal-close-btn">No</button>
+                    <button type="submit" class="modal-confirm-btn">Sim</button>
+                    <button type="button" class="modal-close-btn">Não</button>
                 </div>
             </div>
         </form>
 
         <form id="errorModal" class="modal">
             <div class="modal-card">
-                <h2>Image can't be used</h2>
+                <h2>Imagem inválida</h2>
         
-                <p>Has been detect a non medical image.</p>
-                <p>Try again.</p>
+                <p>Foi detectado uma imagem não médica.</p>
+                <p>Envie uma imagem válida.</p>
                 
                 <img src="" alt="">
 
                 <div>
-                    <button type="button" class="modal-close-btn">Back</button>
+                    <button type="button" class="modal-close-btn">Voltar</button>
                 </div>
             </div>
         </form>
     
     
-        <h1>Medical image classifier</h1>
+        <h1>Classificador de imagens médicas</h1>
     
 
         <form id="file-form" method="POST" enctype="multipart/form-data">
@@ -64,14 +64,14 @@
         {% if classifications != undefined %}
         <section id="previous-classifications">
             <table>
-                <caption>Previous classifications</caption>
+                <caption>Classificações anteriores</caption>
     
                 <thead>
                     <tr>
-                        <th>Images</th>
-                        <th>Type</th>
-                        <th>Prediction</th>
-                        <th>Date / Time</th>
+                        <th>Imagens</th>
+                        <th>Tipo</th>
+                        <th>Previsões</th>
+                        <th>Data / Horário</th>
                     </tr>
                 </thead>
 
@@ -83,7 +83,7 @@
                         <td>
                             <ul>
                                 {% if pred.prediction|length >= 3 %}
-                                {% for i in range(2) %} 
+                                {% for i in range(3) %} 
                                 <li><strong> {{ pred.prediction[i|string][0] }}:</strong> {{ pred.prediction[i|string][1] }}%</li>
                                 {% endfor %}
                                 {% else %}
@@ -100,7 +100,7 @@
             </table>
 
             <div id="load-more">
-                <button hx-get="/load-more" hx-trigger="click" hx-target="#content-container" hx-swap="beforeend">Load More</button>
+                <button hx-get="/load-more" hx-trigger="click" hx-target="#content-container" hx-swap="beforeend">Ver mais</button>
             </div>
         </section>
         {% endif %}

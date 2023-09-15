@@ -66,16 +66,15 @@ def PredictDisease(img, index):
     else:
         return ModelLogic(model=liverMRIModel, img=img)
     
-
+    	
 def ModelLogic(model, img):
     pred_tensor = model.forward(img)
     pred = F.softmax(pred_tensor, dim=1).squeeze().detach().numpy()
 
-    results = [[i, p] for i, p in enumerate(pred*100)]
-    results = np.around(results, 1)
+    results = np.array([[i, p] for i, p in enumerate(pred*100)])
     results = results[results[:, 1].argsort()][::-1]
 
-    dic = {i:[model.class_names[int(x)], y] for i, (x, y) in enumerate(results.tolist())}
+    dic = {i:[model.class_names[int(x)], f'{y:.2f}'] for i, (x, y) in enumerate(results.tolist())}
 
     return dic
 
@@ -83,11 +82,11 @@ def ModelLogic(model, img):
 def BinaryModelLogic(model, img):
     pred = model.forward(img)
 
-    pred = np.around(pred[0][0] * 100, 1)
+    pred = pred[0][0] * 100
     pred_array = np.array([[1, pred], [0, 100 - pred]])
     sorted_pred_array = pred_array[pred_array[:, 1].argsort()][::-1]
     
 
-    dic = {i:[model.class_names[int(x)], y] for i, (x, y) in enumerate(sorted_pred_array.tolist())}
+    dic = {i:[model.class_names[int(x)], f'{y:.2f}'] for i, (x, y) in enumerate(sorted_pred_array.tolist())}
 
     return dic

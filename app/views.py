@@ -81,8 +81,8 @@ def logout():
 def dashboard():
     form = ImageForm()
     
-    predictions = Classifications.query.filter_by(user_id=int(current_user.id)).order_by(Classifications.id.desc()).limit(6).all()
-    session['num_tr'] = 0
+    predictions = Classifications.query.filter_by(user_id=int(current_user.id)).order_by(Classifications.id.desc()).limit(5).all()
+    session['num_tr'] = 1
 
     return render_template('Dashboard.html', form=form, classifications=predictions)
 
@@ -109,6 +109,12 @@ def process_data():
 def redirect_model():    
     pred_dict = PredictDisease(session['image'], session['class_index'])
 
+    if Classifications.query.count() >= 100:
+        oldest_record = Classifications.query.order_by(Classifications.timestamp).first()
+
+        db.session.delete(oldest_record)
+        db.session.commit()
+
     new_classification = Classifications(
         user_id=current_user.id,
         image=b64encode(session['image']).decode('utf-8'),
@@ -126,11 +132,12 @@ def redirect_model():
 @main.get('/load-more')
 def load_more():
 
-
-    predictions = Classifications.query.filter_by(user_id=int(current_user.id)).order_by(Classifications.id.desc()).offset(6 + session['num_tr']).limit(6).all()
+    predictions = Classifications.query.filter_by(user_id=int(current_user.id)).order_by(Classifications.id.desc()).offset(5 + session['num_tr']).limit(5).all()
 
     if len(predictions) != 0:
-        session['num_tr'] += 6
+        session['num_tr'] += 5
+    else:
+        return ''
 
     return render_template('LoadMore.html', classifications=predictions)
 
