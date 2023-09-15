@@ -228,6 +228,19 @@ div.modal-card .modal-confirm-btn:hover {
     height: 4rem;
     object-fit: cover;
 } 
+#load-more {
+    margin: 1rem;
+    text-align: center;
+}
+
+#load-more button {
+    color: white;
+
+    border: none;
+    padding: .6rem;
+    border-radius: .6rem;
+    background-color: #0B5ED7;
+}
 
 @media(max-width: 768px) {
     

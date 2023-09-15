@@ -1,3 +1,7 @@
+document.addEventListener('DOMContentLoaded', function () {
+    htmx.engine();
+});
+
 $(document).ready(function() {
     function showConfirmModal(message, image) {
         $('#class-name-modal').text(message);
@@ -29,6 +33,7 @@ $(document).ready(function() {
             processData: false,
             contentType: false,
             cache: false,
+            timeout:5000,
             success: function (data) {
                 if (data.index == '8') {
                     showErrorModal(data.image);

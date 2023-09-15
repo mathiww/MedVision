@@ -9,6 +9,8 @@
     <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='icons/favicon/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='icons/favicon/favicon-16x16.png')}}">
     <link rel="manifest" href="{{url_for('static', filename='icons/favicon/site.webmanifest')}}">
+
+    <script src="https://unpkg.com/htmx.org@1.9.5"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="{{url_for('static', filename='js/dashboard.js')}}"></script>
 
@@ -50,7 +52,7 @@
         </form>
     
     
-        <h1>Medical image classfier</h1>
+        <h1>Medical image classifier</h1>
     
 
         <form id="file-form" method="POST" enctype="multipart/form-data">
@@ -73,29 +75,33 @@
                     </tr>
                 </thead>
 
-                <tbody>
-                    {% for c in classifications %}
+                <tbody id="content-container">
+                    {% for pred in classifications %}
                     <tr class="item-row">
-                        <td><img src="data:image/png;base64,{{ c.image }}"></td>
-                        <td>{{ c.class_name }}</td>
+                        <td><img src="data:image/png;base64,{{ pred.image }}"></td>
+                        <td>{{ pred.class_name }}</td>
                         <td>
                             <ul>
-                                {% if c.prediction|length >= 3 %}
+                                {% if pred.prediction|length >= 3 %}
                                 {% for i in range(2) %} 
-                                <li><strong> {{ c.prediction[i|string][0] }}:</strong> {{ c.prediction[i|string][1] }}%</li>
+                                <li><strong> {{ pred.prediction[i|string][0] }}:</strong> {{ pred.prediction[i|string][1] }}%</li>
                                 {% endfor %}
                                 {% else %}
                                 {% for i in range(2) %}
-                                <li><strong> {{ c.prediction[i|string][0] }}:</strong> {{ c.prediction[i|string][1] }}%</li>
+                                <li><strong> {{ pred.prediction[i|string][0] }}:</strong> {{ pred.prediction[i|string][1] }}%</li>
                                 {% endfor %}
                                 {% endif %}
                             </ul>
                         </td>
-                        <td>{{ c.time.strftime("%d/%m/%Y %H:%M")}} UTC</td>
+                        <td>{{ pred.time.strftime("%d/%m/%Y %H:%M")}} UTC</td>
                     </tr>
                     {% endfor %}
                 </tbody>    
             </table>
+
+            <div id="load-more">
+                <button hx-get="/load-more" hx-trigger="click" hx-target="#content-container" hx-swap="beforeend">Load More</button>
+            </div>
         </section>
         {% endif %}
     
