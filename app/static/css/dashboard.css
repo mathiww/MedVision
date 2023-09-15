@@ -167,7 +167,7 @@ div.modal-card .modal-confirm-btn:hover {
 
 #previous-classifications table {
     border-collapse: collapse;
-    max-width: 60rem;
+    width: 60rem;
     margin: 0 auto;
 
     /* border: .1rem solid var(--lighter-grey); */

@@ -8,7 +8,7 @@ from flask_login import login_user, LoginManager, login_required, logout_user, c
 from flask_bcrypt import Bcrypt
 
 from .forms import LoginForm, RegisterForm, ImageForm
-from .db import * # Importing app from here
+from .db import *
 
 main = Blueprint('main', __name__)
 

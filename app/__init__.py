@@ -5,7 +5,6 @@ from config import Config
 from .db import db
 
 
-
 def create_app():
     app = Flask(__name__)
 
