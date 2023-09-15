@@ -37,6 +37,9 @@ $(document).ready(function() {
                 }
             },
             error: function (xhr, status, error) {
+                console.log(xhr)
+                console.log(status)
+                console.log(error)
                 console.log("DEU ERRO AI")
             }
         });
