@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, session, redirect, jsonify, url_for
+from flask import current_app, Blueprint, render_template, session, redirect, jsonify, url_for
 
 from .models import PredictImageType, PredictDisease
 
@@ -12,9 +12,9 @@ from .db import * # Importing app from here
 
 main = Blueprint('main', __name__)
 
-bcrypt = Bcrypt(app)
+bcrypt = Bcrypt(current_app)
 
-login_manager = LoginManager(app)
+login_manager = LoginManager(current_app)
 login_manager.login_view = 'login'
 
 
@@ -121,11 +121,11 @@ def redirect_model():
     return redirect(url_for('main.dashboard'))
 
 
-@app.errorhandler(404) 
+@main.errorhandler(404) 
 def not_found(e):
   return render_template("404.html")
 
 
-@app.errorhandler(405) 
+@main.errorhandler(405) 
 def not_allowed(e):
   return render_template("404.html")
