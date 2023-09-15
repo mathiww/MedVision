@@ -1,0 +1,20 @@
+{% for pred in classifications %}
+<tr class="item-row">
+    <td><img src="data:image/png;base64,{{ pred.image }}"></td>
+    <td>{{ pred.class_name }}</td>
+    <td>
+        <ul>
+            {% if pred.prediction|length >= 3 %}
+            {% for i in range(2) %} 
+            <li><strong> {{ pred.prediction[i|string][0] }}:</strong> {{ pred.prediction[i|string][1] }}%</li>
+            {% endfor %}
+            {% else %}
+            {% for i in range(2) %}
+            <li><strong> {{ pred.prediction[i|string][0] }}:</strong> {{ pred.prediction[i|string][1] }}%</li>
+            {% endfor %}
+            {% endif %}
+        </ul>
+    </td>
+    <td>{{ pred.time.strftime("%d/%m/%Y %H:%M")}} UTC</td>
+</tr>
+{% endfor %}

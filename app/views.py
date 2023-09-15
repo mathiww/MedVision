@@ -15,13 +15,13 @@ main = Blueprint('main', __name__)
 bcrypt = Bcrypt(current_app)
 
 login_manager = LoginManager(current_app)
-login_manager.login_view = 'login'
+login_manager.login_view = 'main.login'
 
 
-def clear_session(keys: list = None):
-    if keys:
-        for k in keys:
-            session.pop(k)
+def clear_session(*args):
+    if args:
+        for arg in args:
+            session.pop(arg)
         return
     
     session.clear()
@@ -72,8 +72,7 @@ def login():
 @main.route('/logout', methods=['GET'])
 @login_required
 def logout():
-    logout_user()
-    
+    logout_user()    
     return redirect(url_for('main.login'))
 
 
@@ -82,7 +81,10 @@ def logout():
 def dashboard():
     form = ImageForm()
     
-    return render_template('Dashboard.html', form=form, classifications=current_user.classifications)
+    predictions = Classifications.query.filter_by(user_id=int(current_user.id)).order_by(Classifications.id.desc()).limit(6).all()
+    session['num_tr'] = 0
+
+    return render_template('Dashboard.html', form=form, classifications=predictions)
 
 
 @main.route('/process-data', methods=['POST'])
@@ -116,9 +118,21 @@ def redirect_model():
     db.session.add(new_classification)
     db.session.commit()
 
-    clear_session(['class_name', 'class_index', 'image'])
+    clear_session('class_name', 'class_index', 'image')
 
     return redirect(url_for('main.dashboard'))
+
+
+@main.get('/load-more')
+def load_more():
+
+
+    predictions = Classifications.query.filter_by(user_id=int(current_user.id)).order_by(Classifications.id.desc()).offset(6 + session['num_tr']).limit(6).all()
+
+    if len(predictions) != 0:
+        session['num_tr'] += 6
+
+    return render_template('LoadMore.html', classifications=predictions)
 
 
 @main.errorhandler(404) 
