@@ -212,6 +212,10 @@ div.modal-card .modal-confirm-btn:hover {
     border-right: .1rem solid var(--lighter-grey);
 }
 
+#imagemLogout {
+    width: 25px;
+}
+
 
 #previous-classifications ul, #previous-classifications ol {
     text-align: left;
