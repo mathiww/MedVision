@@ -20,17 +20,19 @@
             <div class="heading">
                 <h1>MedVision</h1>
             </div>
+            
+            <div id="formRegistro">
+                <form method="POST" >
+                    {{ form.hidden_tag() }}
+                    <span class="textForm">Usuário</span>
+                    {{ form.username }}
+                    <span class="textForm">Senha</span>
+                    {{ form.password }}
+                    {{ form.submit }}
+                </form>
 
-            <form method="POST" id="formRegistro">
-                {{ form.hidden_tag() }}
-                <span class="textForm">Usuário</span>
-                {{ form.username }}
-                <span class="textForm">Senha</span>
-                {{ form.password }}
-                {{ form.submit }}
-            </form>
-
-            <span>Não possui cadastro? Crie <a id="loginref" href="/register">aqui</a> sua conta</span>
+                <p>Não possui cadastro? Crie <a id="loginref" href="/register">aqui</a> sua conta</p>
+            </div>
         </div>
     </div>
 </body>

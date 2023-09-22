@@ -44,11 +44,19 @@ body {
 }
 
 #formRegistro {
-    display: flex;
     width: 80%;
-    flex-direction: column;
     flex-grow: 1;
 }
+
+#formRegistro form {
+    display: flex;
+    flex-direction: column;
+}
+
+#formRegistro p {
+    text-align: center;
+}
+
 
 #formRegistro input {
     border: 1px solid #44444471;

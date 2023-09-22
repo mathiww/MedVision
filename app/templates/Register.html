@@ -13,25 +13,27 @@
 </head>
 <body>
     <div class="containerPrincipal">
-    <div class="containerFoto">
-    </div>
+        <div class="containerFoto"></div>
+
         <div class="containerForm">
             <div class="heading">
                 <h1>MedVision</h1>
             </div>
 
-            <form method="POST" id="formRegistro">
-                {{ form.hidden_tag() }}
-                <span class="textForm">Usuário</span>
-                {{ form.username }}
-                <span class="textForm">Email</span>
-                {{ form.email }}
-                <span class="textForm">Senha</span>
-                {{ form.password }}
-                {{ form.submit }}
-            </form>
+            <div id="formRegistro">
+                <form method="POST">
+                    {{ form.hidden_tag() }}
+                    <span class="textForm">Usuário</span>
+                    {{ form.username }}
+                    <span class="textForm">Email</span>
+                    {{ form.email }}
+                    <span class="textForm">Senha</span>
+                    {{ form.password }}
+                    {{ form.submit }}
+                </form>
 
-            <span>Já possui cadastro? Entre <a id="loginref" href="/login">aqui</a></span>
+                <p>Já possui cadastro? Entre <a id="loginref" href="/login">aqui</a></p>
+            </div>
         </div>
     </div>
 </body>
