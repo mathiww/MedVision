@@ -32,9 +32,9 @@ def load_user(user_id):
  
 
 @main.route('/', methods=['GET'])
-@login_required
 def home():
-    return render_template('PaginaInicial.html')
+    return redirect(url_for('main.login'))
+
 
 @main.route('/register', methods=['GET', 'POST'])
 def register():
