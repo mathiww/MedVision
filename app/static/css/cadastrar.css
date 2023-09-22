@@ -34,10 +34,20 @@ body {
     justify-content: center;
     align-items: center;
 }
+
+.heading {
+    font-size: 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
 #formRegistro {
     display: flex;
     width: 80%;
     flex-direction: column;
+    flex-grow: 1;
 }
 
 #formRegistro input {
