@@ -31,4 +31,4 @@ class LoginForm(FlaskForm):
 
 
 class ImageForm(FlaskForm):
-    image = FileField(validators=[InputRequired(), FileAllowed(upload_set=['png', 'tiff', 'jpeg', 'jpg', 'dicom', 'ppm'], message='File type not allowed.')])
+    image = FileField(validators=[InputRequired(), FileAllowed(upload_set=['png', 'tiff', 'jpeg', 'jpg', 'dicom'], message='Tipo de arquivo não permitido.')])
