@@ -1,0 +1,44 @@
+body {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    margin: 0;
+}
+
+.lateralMenu {
+    display: flex;
+    padding: 40px 10px 30px 15px;
+    background-color: #595EEC;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    align-self: center;
+    height: 100vh;
+    top: 0;
+    position: fixed;
+    border-radius: 0 20px 20px 0;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.menuPrincipal {
+    display: flex;
+    flex-direction: column;
+}
+
+.menuPrincipal a {
+    padding: 10px;
+    margin: 10px;
+}
+
+.menuPrincipal i {
+    font-size: 1.5rem;
+}
+
+.menuItem.active {
+    background-color: #354188;
+    border-radius: 10px;
+}
