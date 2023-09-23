@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{url_for('static', filename='css/dashboard.css')}}">
     <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='icons/favicon/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='icons/favicon/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='icons/favicon/favicon-16x16.png')}}">
@@ -17,23 +16,70 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <div class="lateralMenu">
-        <div class="menuPrincipal">
-            <a href="/" class="menuItem active"><i class="bi bi-house-door-fill"></i></a>
-            <a href="/dashboard" class="menuItem"><i class="bi bi-search"></i></a>
+    <header>
+        <h1>MedVision</h1>
+        <div class="opcoes">
+            <a href="/login">Fazer Login</a>
+            <a href="/register" id="registrarPage">Registrar</a>
         </div>
-        <a href="/logout"><img id="imagemLogout" src="../static/icons/saida.svg" alt="Logout"></a>
-    </div>
+    </header>
     <main id="main-content">
-        <h1>Classificador de Imagens Médicas</h1>
         <span>Seja bem-vindo, este é um projeto de pesquisa desenvolvido por alunos do 
-            Instituto Federal do Triângulo Mineiro.</span>
-        <h3>Alunos Participantes</h3>
-        <ul>
-            <li></li>
+            Instituto Federal do Triângulo Mineiro - Campus Ituiutaba.</span>
+        <h3>Classificador Geral</h3>
+        <span>Este é um classificador que identifica se uma imagem é médica ou não, também identifica o tipo da imagem e a doença relacionada.</span>
+        <ul id="listaDoencas">
+            <li><h3>Imagens que podem ser classificadas</h3></li>
+            <li>Blood</li>
+            <li>Ressonância Magnética do Cérebro</li>
+            <li>Tomografia do Pulmão</li>
+            <li>Raio-X do Pulmão</li>
+            <li>Ressonância Magnética do Joelho</li>
+            <li>Raio-X do Joelho</li>
+            <li>Ressonância Magnética do Fígado</li>
+            <li>Oftalmoscopia</li>
         </ul>
+        <h3>Alunos Participantes</h3>
 
+        <ul class="alunos">
+            <li class="cardPart">
+                <img src="../static/images/participantes/bruno_gomes.jpg" alt="Imagem do Aluno Bruno Gomes" class="imagemAluno">
+                <span>Bruno Gomes</span>
+            </li>
+            <li class="cardPart">
+                <img src="../static/images/participantes/.jpg" alt="Imagem do Aluno João Pedro Araújo" class="imagemAluno">
+                <span>João Pedro Araújo</span>
+            </li>
+            <li class="cardPart">
+                <img src="../static/images/participantes/.jpg" alt="Imagem do Aluno Matheus" class="imagemAluno">
+                <span>Matheus</span>
+            </li>
+            <li class="cardPart">
+                <img src="../static/images/participantes/.jpg" alt="Imagem do Aluno Pedro" class="imagemAluno">
+                <span>Pedro</span>
+            </li>
+            <li class="cardPart">
+                <img src="../static/images/participantes/.jpg" alt="Imagem do Aluno Gabriel" class="imagemAluno">
+                <span>Gabriel</span>
+            </li>
+        </ul>
     </main>
+    <button onclick="topFunction()" id="topo" title="Go to top">Voltar ao topo ⇮</button>
+    <script>
+        mybutton = document.getElementById("topo");
+        window.onscroll = function() {scrollFunction()};
 
+        function scrollFunction() {
+            if (document.body.scrollTop > 30 || document.documentElement.scrollTop > 30) {
+                mybutton.style.display = "block";
+            } else {
+                mybutton.style.display = "none";
+            }
+        }
+        function topFunction() {
+            document.body.scrollTop = 0; 
+            document.documentElement.scrollTop = 0; 
+        }
+    </script>
 </body>
 </html>
