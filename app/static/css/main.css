@@ -42,3 +42,26 @@ a {
     background-color: #354188;
     border-radius: 10px;
 }
+
+#listaDoencas {
+    list-style: none;
+}
+
+#listaDoencas li {
+    padding: 5px 0;
+}
+
+.alunos {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+}
+
+.cardPart {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    width: 200px;
+    margin: 10px;
+    text-align: center;
+}

@@ -17,26 +17,36 @@
     <title>Dashboard</title>
 </head>
 <body>
-    <div class="lateralMenu">
-        <div class="menuPrincipal">
-            <a href="/" class="menuItem active"><i class="bi bi-house-door-fill"></i></a>
-            <a href="/dashboard" class="menuItem"><i class="bi bi-search"></i></a>
-        </div>
-        <a href="/logout"><img id="imagemLogout" src="../static/icons/saida.svg" alt="Logout"></a>
-    </div>
     <main id="main-content">
-        <h1>Classificador de Imagens Médicas</h1>
+        <h1>MedVision</h1>
         <span>Seja bem-vindo, este é um projeto de pesquisa desenvolvido por alunos do 
-            Instituto Federal do Triângulo Mineiro.</span>
+            Instituto Federal do Triângulo Mineiro - Campus Ituiutaba.</span>
+        <h3>Classificador Geral</h3>
+        <span>Este é um classificador que identifica se uma imagem é médica ou não, também identifica o tipo da imagem e a doença relacionada.</span>
+        <ul id="listaDoencas">
+            <li><h4>Imagens que podem ser classificadas</h4></li>
+            <li>Blood</li>
+            <li>Ressonância Magnética do Cérebro</li>
+            <li>Tomografia do Pulmão</li>
+            <li>Raio-X do Pulmão</li>
+            <li>Ressonância Magnética do Joelho</li>
+            <li>Raio-X do Joelho</li>
+            <li>Ressonância Magnética do Fígado</li>
+            <li>Oftalmoscopia</li>
+        </ul>
         <h3>Alunos Participantes</h3>
-        <ul>
-            <li>
-                <img class="Imagem Alunos" src="../">
-                <h4>Bruno Gomes</h4>
+
+        <ul class="alunos">
+            <li class="cardPart">
+                <img src="../static/images/participantes/bruno_gomes.jpg" alt="Imagem do Aluno Bruno Gomes" class="imagemAluno">
+                <span>Bruno Gomes</span>
+            </li>
+            <li class="cardPart">
+                <img src="../static/images/participantes/bruno_gomes.jpg" alt="Imagem do Aluno Bruno Gomes" class="imagemAluno">
+                <span>Bruno Gomes</span>
             </li>
         </ul>
 
     </main>
-
 </body>
 </html>

@@ -34,11 +34,29 @@ body {
     justify-content: center;
     align-items: center;
 }
-#formRegistro {
+
+.heading {
+    font-size: 2rem;
     display: flex;
+    flex-direction: column;
+    justify-content: center;
+    flex-grow: 1;
+}
+
+#formRegistro {
     width: 80%;
+    flex-grow: 1;
+}
+
+#formRegistro form {
+    display: flex;
     flex-direction: column;
 }
+
+#formRegistro p {
+    text-align: center;
+}
+
 
 #formRegistro input {
     border: 1px solid #44444471;
