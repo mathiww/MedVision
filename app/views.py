@@ -142,11 +142,11 @@ def load_more():
     return render_template('LoadMore.html', classifications=predictions)
 
 
-@main.errorhandler(404) 
+@current_app.errorhandler(404) 
 def not_found(e):
   return render_template("404.html")
 
 
-@main.errorhandler(405) 
+@current_app.errorhandler(405) 
 def not_allowed(e):
   return render_template("404.html")

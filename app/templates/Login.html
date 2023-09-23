@@ -24,9 +24,9 @@
             <div id="formRegistro">
                 <form method="POST" >
                     {{ form.hidden_tag() }}
-                    <span class="textForm">Usuário</span>
+                    <label class="textForm" for="username">Usuário</label>
                     {{ form.username }}
-                    <span class="textForm">Senha</span>
+                    <label class="textForm" for="password">Senha</label>
                     {{ form.password }}
                     {{ form.submit }}
                 </form>

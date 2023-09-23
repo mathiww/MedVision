@@ -1,18 +1,21 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Page not found</title>
+    <title>404</title>
     <link rel="apple-touch-icon" sizes="180x180" href="{{url_for('static', filename='icons/favicon/apple-touch-icon.png')}}">
     <link rel="icon" type="image/png" sizes="32x32" href="{{url_for('static', filename='icons/favicon/favicon-32x32.png')}}">
     <link rel="icon" type="image/png" sizes="16x16" href="{{url_for('static', filename='icons/favicon/favicon-16x16.png')}}">
     <link rel="manifest" href="{{url_for('static', filename='icons/favicon/site.webmanifest')}}">
-    
+    <link rel="stylesheet" href="{{url_for('static', filename='css/404.css')}}">
+
 </head>
 <body>
-    <h1>404 Error</h1>
+    <div class="container">
+        <h1>404</h1>
 
-    <p>Seems like this page doesn't exist. Click <a href="/">here</a> to return to the login page.</p>
+        <p>Página não encontrada. Volte para a <a href="/">página inicial</a>.</p>
+    </div>
 </body>
 </html>
