@@ -1,4 +1,4 @@
-from flask import current_app, Blueprint, render_template, session, redirect, jsonify, url_for
+from flask import current_app, Blueprint, render_template, request, session, redirect, jsonify, url_for
 
 from .models import PredictImageType, PredictDisease
 
@@ -127,6 +127,18 @@ def redirect_model():
     clear_session('class_name', 'class_index', 'image')
 
     return redirect(url_for('main.dashboard'))
+
+@main.route("/classification-app", methods=['GET','POST'])
+def classification_api():
+    session['class_name'], session['class_index'] = PredictImageType(request.files['image'])
+    pred_dict = PredictDisease(session['image'], session['class_index'])
+    new_classification = Classifications(
+        user_id=current_user.id,
+        image=b64encode(session['image']).decode('utf-8'),
+        class_name=session['class_name'],
+        prediction=pred_dict,
+    )
+    return {"message": new_classification}
 
 
 @main.get('/load-more')
