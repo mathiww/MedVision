@@ -5,7 +5,7 @@
     <td>
         <ul>
             {% if pred.prediction|length >= 3 %}
-            {% for i in range(2) %} 
+            {% for i in range(3) %} 
             <li><strong> {{ pred.prediction[i|string][0] }}:</strong> {{ pred.prediction[i|string][1] }}%</li>
             {% endfor %}
             {% else %}
